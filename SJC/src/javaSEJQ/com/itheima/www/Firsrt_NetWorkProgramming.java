@@ -15,7 +15,12 @@ import java.net.UnknownHostException;
 import org.junit.Test;
 import org.omg.CORBA.portable.InputStream;
 import java.net.DatagramSocket;
-/*OSI 参考模型：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。
+
+/**
+ * 
+ * @author Sunny
+ * @version1.0
+ *OSI 参考模型：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层。
  * 
  * 网络编程: 
  * 三要素: 
@@ -34,7 +39,7 @@ import java.net.DatagramSocket;
  *    
  *    ip地址: 就是网络中设备的唯一标识 192.168.94.84
  *    端口: 程序的唯一标识  范围 0-65535 , 你的指定的端口 1024 - 65535 ,不能 与已被其他程序占用的端口重复. 
- *    
+ *
  */
 public class Firsrt_NetWorkProgramming {
 	public static void main(String[] args) throws IOException {
