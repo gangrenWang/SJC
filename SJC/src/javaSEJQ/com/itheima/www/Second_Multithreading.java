@@ -7,6 +7,6 @@ package javaSEJQ.com.itheima.www;
  * 4.实现多线程的两种方式
  * 5.线程之间的通信
  */
-public class Multithreading {
+public class Second_Multithreading {
 
 }

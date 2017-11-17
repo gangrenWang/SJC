@@ -73,7 +73,7 @@ class Student{
 	
 	
 }
-public class Reflex {
+public class Third_Reflex {
 
 	public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
 		Student s = new Student("zhangSan",12);
