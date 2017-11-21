@@ -1,4 +1,4 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.Annotaion;
 
 import org.junit.After;
 import org.junit.Test;

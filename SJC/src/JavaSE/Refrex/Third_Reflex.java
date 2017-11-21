@@ -1,4 +1,4 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.Refrex;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

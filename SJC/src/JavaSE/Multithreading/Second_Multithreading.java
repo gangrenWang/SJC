@@ -1,4 +1,4 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.Multithreading;
 /*
  * 多线程相关操作：
  * 1.线程和进程的概念

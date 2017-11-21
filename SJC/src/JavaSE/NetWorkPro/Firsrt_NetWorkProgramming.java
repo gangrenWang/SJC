@@ -1,4 +1,4 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.NetWorkPro;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;

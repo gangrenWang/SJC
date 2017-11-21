@@ -1,13 +1,14 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.Annotaion;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 
 
 public class Fifth_annotation {
 
 	public static void main(String[] args) throws Exception, SecurityException {
-		main01();
+	method02();
 	}
 
 	@HYAnnotation(age = 12, username = "sun", arr = { "" })
@@ -32,5 +33,16 @@ public class Fifth_annotation {
 		}
 
 	}
+	public static void method02(){
+		
+		ArrayList<String>list = new ArrayList<>();
+		@SuppressWarnings({"rawtypes","unused"})
+		ArrayList list1 = new ArrayList<>();
+		list1.add("123");
+		list1.add(2);
+		System.out.println(list1.size());
+	}
+	
+
 
 }

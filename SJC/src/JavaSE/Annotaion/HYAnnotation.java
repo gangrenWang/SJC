@@ -1,4 +1,4 @@
-package javaSEJQ.com.itheima.www;
+package JavaSE.Annotaion;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
