@@ -17,16 +17,10 @@ public class Seventh_proxy {
 	 * 
 	 */
 	public static void main( String[] args) {
+		
 		/*
-		ArrayList<String>list = new ArrayList<>();
-		list.add("123");
-		list.add("456");
-		List<String> list2 = Collections.unmodifiableList(list);
-		list.add("qaz");
-		list.add("cv");
-		System.out.println(list2);
-		*/
-		/*
+		 * 代理就记住这一个方法：
+		 * Proxy.newProxyInstance()
 		 * ClassLoader loader : 类加载器，当前类的加载器
 		 * Class<?> interfaces interfaces : 被代理类的对象的所有接口
 		 * InvocationHandler h: 处理类对象，告诉代理类，如何处理被代理的方法。

@@ -1,1 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<country>
+<china area = "960" population = "16" >
+	<shandong>
+	
+	</shandong>
+	
+	<henan>
+	
+	</henan>
+	
+	<hebei>
+	
+	</hebei>
+</china>
+<american area = "963" population = "3">
+</american>
+<canada area = "700" population = "5">
+</canada>
+</country>
