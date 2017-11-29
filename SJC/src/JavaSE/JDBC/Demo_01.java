@@ -1,54 +1,63 @@
 package JavaSE.JDBC;
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Scanner;
 
-import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
+
+
+import java.sql.SQLException;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp.BasicDataSourceFactory;
+
 public class Demo_01 {
+	
+	static Field[]stuFiledArr = StuTable.class.getFields();
 
 	public static void main(String[] args) throws Exception {
-		System.out.println(HYGetConnection.getConnection());
+
 		// 获取连接对象
-		// method01();
+		method01();
 		// method02();
 		// method03();
 		// method04();
 	}
-	// a.查询：brand为“晨光”的记录，将所有字段信息打印到控制台上；
+	// a.查询：student表的所有信息；
 	public static void method01() throws Exception {
 		Connection ct = HYGetConnection.getConnection();
-		String SQLString = "SELECT * FROM Stationery_tb WHERE brand = '晨光'";
-		Statement st = (Statement) ct.createStatement();
+		String SQLString = "SELECT * FROM student";
+		java.sql.Statement st =  ct.createStatement();
 		ResultSet set = st.executeQuery(SQLString);
+		//利用反射获取StuTable类中所有字段
+		
 		while (set.next()) {
-			System.out.println(set.getInt(1) + " " + set.getString(2) + " " + set.getFloat(3) + " " + set.getInt(4)
-					+ " " + set.getString(5));
+			System.out.println("-------------------------------------");
+			for(int i =0;i <stuFiledArr.length;i++){
+				String tempName = stuFiledArr[i].getName();
+				System.out.println(tempName+" : "+set.getObject(tempName));
+				
+			}
+			System.out.println("-------------------------------------");
 		}
-		st.close();
-		set.close();
-		ct.close();
+		HYGetConnection.closeALL(set, st, ct);
+		
 	}
-	// b.按照目前的库存来计算出“中华铅笔”的价值总额；
-	public static void method02() throws SQLException {
-		String sql = "SELECT price*stock FROM Stationery_tb WHERE name = '中华铅笔'";
-		Connection ct = HYGetConnection.getConnection();
-		Statement st = (Statement) ct.createStatement();
-		ResultSet set = st.executeQuery(sql);
-		while (set.next()) {
-			System.out.println(set.getString(1));
-		}
-		st.close();
-		set.close();
-		ct.close();
 	
 
-	}
-
-	// c. 将表中name为“真彩水性笔”对应的记录的品牌修改为“真彩”;
-	static void method03() throws SQLException {
+	// c. 将表中examTeacher为“王刚韧”的对应记录，成绩改为65”;
+	static void method03() throws Exception {
 		Connection ct = HYGetConnection.getConnection();
 		Statement st = (Statement) ct.createStatement();
 		//
@@ -63,22 +72,44 @@ public class Demo_01 {
 		ct.close();
 	}
 
-	// d. 新增记录：id: 6、name:直尺、price: 2、stock：40、brand:得力
-	static void method04() throws SQLException {
+	// d. 新增记录
+	static void method04() throws Exception {
+		//控制台输入
+		Scanner sc = new Scanner(System.in);
+		//创建一个map准备存放从控制台接收的数据
+		HashMap<String, Object>map = new HashMap<>();
+		//循环录入
+		for(int i =0;i<stuFiledArr.length;i++){
+			String temFiledName = stuFiledArr[i].getName();
+			//id是自增的，不用用户输入
+			if(temFiledName.equals("id"))continue;
+			System.out.println("please inter "+temFiledName+":");
+			map.put(temFiledName, sc.next());
+		}
+		
 		Connection ct =  HYGetConnection.getConnection();
-		String sql = "INSERT INTO Stationery_tb(id,name,price,stock) values(?,?,?,?)";
+		String filedNames = "";
+		String wenHaos = "";
+		for(int i =1;i<stuFiledArr.length;i++){
+			filedNames= filedNames+stuFiledArr[i].getName();
+			wenHaos+="?";
+			if(i<stuFiledArr.length-1){
+				filedNames+=",";
+				wenHaos+=",";
+					} 
+		}
+		String sql = "INSERT INTO student("+filedNames+") values("+wenHaos+")";
+		System.out.println(sql);
 		PreparedStatement st = (PreparedStatement) ct.prepareStatement(sql);
-		st.setInt(1, 6);
-		st.setString(2, "直尺");
-		st.setFloat(3, 2);
-		st.setInt(4, 40);
-		st.setString(5, "得力");
+		for(int i=0;i<map.size();i++){
+			//避开id这个字段
+			st.setObject(i+1, map.get(stuFiledArr[i+1].getName()));
+		}
 		int a = st.executeUpdate();
 		if (a > 0) {
 			System.out.println("插入成功");
 		}
-		st.close();
-		ct.close();
+		HYGetConnection.closeALL(null, st, ct);
 	}
 }
 
