@@ -3,6 +3,8 @@ package JavaSE.NetWorkTCP;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,15 +20,15 @@ public class TCP_Server {
 	public static void main(String[] args) throws IOException {
 		System.out.println("服务器启动,等待数据.."); 
 		// 创建 ServerScoket 类
-		 ServerSocket ss  = new ServerSocket(6666);
-		 
+		 ServerSocket ss  = new ServerSocket(5556);
+		
 		 // 接收数据
 		 Socket accept = ss.accept();
 		 
 		 //获取流对象 
 		 InputStream is  = accept.getInputStream();
 		 
-		 FileOutputStream fos  = new FileOutputStream("zx.jpg");
+		 OutputStream fos  = new FileOutputStream("zx.jpg");
 		 
 		 // 读写数据
 		 byte[] b  = new byte[1024] ; 
@@ -34,8 +36,10 @@ public class TCP_Server {
 		 while (( len  = is.read(b))!=-1 ) {
 			fos.write(b, 0, len); 
 		}
+		 //accept.shutdownInput();
+		 fos = accept.getOutputStream();
+		 fos.write("server：收到".getBytes());
 		 
-		 System.out.println("保存完毕");
 		 //关闭 
 		 fos.close();
 		 is.close();
